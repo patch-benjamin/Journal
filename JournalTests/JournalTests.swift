@@ -26,7 +26,7 @@ class JournalTests: XCTestCase {
         super.tearDown()
         
         // Resets persisted entries
-        controller.entries = []
+        controller.entryArray = []
         
         // MARK: Part 3
 //        controller.saveToPersistentStorage()
