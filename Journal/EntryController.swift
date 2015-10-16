@@ -19,7 +19,7 @@ class EntryController {
     
     // MARK: INITIALIZER
     init() {
-        entryArray = []
+        self.entryArray = []
         loadFromPersistentStorage()
     }
 
