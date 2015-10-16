@@ -10,6 +10,11 @@ import UIKit
 
 class Entry: NSObject, NSCoding {
     
+    static let timeStampKey: String = "timeStamp"
+    static let titleKey: String = "title"
+    static let bodyTextKey: String = "bodytext"
+    
+    
     let timeStamp: String
 //    let timeStamp: NSDate
     let title: String
@@ -32,6 +37,25 @@ class Entry: NSObject, NSCoding {
 
     }
     
+    convenience init?(dictionary : [String: AnyObject]) {
+        guard let timeStamp = dictionary[Entry.timeStampKey] as? String,
+        title = dictionary[Entry.titleKey] as? String,
+        bodyText = dictionary[Entry.bodyTextKey] as? String
+        else {
+            
+            return nil
+        }
+        self.init(timeStamp: timeStamp, title: title, bodyText: bodyText)
+    }
+    
+    // Dictionary Copy Method
+    func dictionaryCopy() -> [String: AnyObject] {
+        return [
+            Entry.timeStampKey: self.timeStamp,
+            Entry.titleKey: self.title,
+            Entry.bodyTextKey: self.bodyText
+        ]
+    }
     
     // MARK: NSCoding
     

@@ -13,24 +13,32 @@ class EntryController {
     
     static let singleton = EntryController()
     
-    var entryArray: [Entry] = [
-        Entry(title: "Declaration", bodyText: "We the people of the United States..."), // 0
-        Entry(title: "Constitution", bodyText: "in order to form a more perfect union..."), // 1
-        Entry(title: "Love", bodyText: "It's all you need..."), //2
-        Entry(title: "Apple", bodyText: "Not oranges..."), //3
-    ]
+    var entryArray: [Entry]
     
+    let entryArrayKey: String = "entryArray"
+    
+    // MARK: INITIALIZER
+    init() {
+        entryArray = []
+        loadFromPersistentStorage()
+    }
+
+    // MARK: ADD
     func addEntry(entry: Entry){
         self.entryArray.append(entry)
+        saveToPersistentStorage()
     }
     
+    // MARK: REMOVE
     func removeEntry(specified: Entry) -> () {
         
         if let index = self.entryArray.indexOf(specified) {
             self.entryArray.removeAtIndex(index)
+            saveToPersistentStorage()
         }
         
     }
+    
     
     func updateEntry(entry: Entry, index: Int) -> () {
         
@@ -38,7 +46,25 @@ class EntryController {
         print("\(entryArray[0].title), \(entryArray[0].timeStamp), \(entryArray[0].bodyText)")
         
     }
-
+    
+    // MARK: SAVE
+    
+    func saveToPersistentStorage() {
+        let entries = self.entryArray.map({$0.dictionaryCopy()})
+        NSUserDefaults.standardUserDefaults().setValue(entries, forKey: self.entryArrayKey)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    // MARK: LOAD
+    
+    func loadFromPersistentStorage() {
+        
+        if let entries = NSUserDefaults.standardUserDefaults().objectForKey(self.entryArrayKey) as? [ [String: AnyObject] ] {
+            
+            
+            self.entryArray = entries.map({Entry(dictionary: $0)!})
+        }
+    }
     
 }
 
