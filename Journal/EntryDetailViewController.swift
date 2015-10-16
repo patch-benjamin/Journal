@@ -13,6 +13,7 @@ class EntryDetailViewController: UIViewController {
     // MARK: Properties
     
     var entry: Entry?
+    var index: Int? // index for entry just above
     
     // MARK: Outlets
     
@@ -33,16 +34,24 @@ class EntryDetailViewController: UIViewController {
     
     @IBAction func saveEntry(sender: UIBarButtonItem) {
      
-        if let existingEntry = entry{
-           
+        if let existingEntry = entry, existingIndex = index{ // update the entry
+            // create new entry with data from view
+            // send the new entry to replace the old entry
             
+//            print("update entry: \(existingEntry.title) at index: \(existingIndex)")
+            let updatedEntry = Entry(title: entryTitle.text!, bodyText: entryBody.text!)
             
-        } else {
+            EntryController.singleton.updateEntry(updatedEntry, index: existingIndex)
             
+        } else { // add new entry
+            print("Add entry")
             
-            
+                EntryController.singleton.addEntry(Entry(title: entryTitle.text!, bodyText: entryBody.text!))
+
         }
-    
+
+        // go back to the list.
+        navigationController?.popViewControllerAnimated(true)
     }
     
     
@@ -55,6 +64,16 @@ class EntryDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func updateWithEntry (entry: Entry, index: Int){
+        
+        self.entry = entry
+        self.index = index
+        entryTitle.text = "\(entry.title)"
+        entryBody.text = "\(entry.bodyText)"
+        
     }
     
 }

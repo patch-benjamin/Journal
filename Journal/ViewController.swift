@@ -10,15 +10,45 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // MARK: Outlets
+    
+    @IBOutlet weak var entriesTable: UITableView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("loaded viewController")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if let detailedView = segue.destinationViewController as? EntryDetailViewController {
+            
+            if segue.identifier == "addNewEntry"{ // if they click the new button
+                
+            } else { // if they click an entry cell
+                
+                if let index = self.entriesTable.indexPathForSelectedRow?.row {
+                    
+                    let entry = EntryController.singleton.entryArray[index]
+                    
+                    _ = detailedView.view
+                    
+                    detailedView.updateWithEntry(entry, index: index)
+                
+                }
+                
+            }
+            
+        }
+        
     }
     
 }

@@ -66,7 +66,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="4Do-Cb-Gjh" kind="show" id="HFO-pW-h2j"/>
+                                            <segue destination="4Do-Cb-Gjh" kind="show" identifier="showEntry" id="HFO-pW-h2j"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -80,8 +80,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="27M-7Z-fQa">
-                        <barButtonItem key="rightBarButtonItem" id="lk9-60-bHc"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="lk9-60-bHc">
+                            <connections>
+                                <segue destination="4Do-Cb-Gjh" kind="show" identifier="addNewEntry" id="REm-2b-mvi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="entriesTable" destination="dkP-ti-lzX" id="UzT-1D-3yc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -147,4 +154,7 @@
             <point key="canvasLocation" x="1002" y="293"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="REm-2b-mvi"/>
+    </inferredMetricsTieBreakers>
 </document>
