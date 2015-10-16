@@ -13,7 +13,7 @@ class EntryController {
     
     static let singleton = EntryController()
     
-    var entryArray: [Entry]
+    var entryArray: [Entry] = []
     
     let entryArrayKey: String = "entryArray"
     
