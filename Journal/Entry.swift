@@ -6,9 +6,9 @@
 //  Copyright © 2015 DevMountain. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class Entry: Equatable {
+class Entry: NSObject, NSCoding {
     
     let timeStamp: String
 //    let timeStamp: NSDate
@@ -32,12 +32,24 @@ class Entry: Equatable {
 
     }
     
+    
+    // MARK: NSCoding
+    
+    required convenience init? (coder: NSCoder){
+        return nil
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        
+    }
+
+    
 }
+
 
 func ==(lhs: Entry, rhs: Entry) -> Bool {
     return ((lhs.timeStamp == rhs.timeStamp) && (lhs.title == rhs.title) && (lhs.bodyText == rhs.bodyText))
 }
-
 
 
 

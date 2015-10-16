@@ -21,6 +21,12 @@ class ViewController: UIViewController {
         print("loaded viewController")
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        entriesTable.reloadData()
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
