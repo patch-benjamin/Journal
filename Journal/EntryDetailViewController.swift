@@ -17,6 +17,8 @@ class EntryDetailViewController: UIViewController {
     
     // MARK: Outlets
     
+    @IBOutlet weak var saveButtonItem: UIBarButtonItem!
+    
     @IBOutlet weak var entryTitle: UITextField!
     
     @IBOutlet weak var entryBody: UITextView!
@@ -33,25 +35,35 @@ class EntryDetailViewController: UIViewController {
     }
     
     @IBAction func saveEntry(sender: UIBarButtonItem) {
-     
+        
+      
         if let existingEntry = entry, existingIndex = index{ // update the entry
             // create new entry with data from view
             // send the new entry to replace the old entry
             
 //            print("update entry: \(existingEntry.title) at index: \(existingIndex)")
-            let updatedEntry = Entry(title: entryTitle.text!, bodyText: entryBody.text!)
+            if let title = entryTitle.text, bodyText = entryBody.text{
+                let updatedEntry = Entry(title: title, bodyText: bodyText)
+                EntryController.singleton.updateEntry(updatedEntry, index: existingIndex)
+                
+                saveButtonItem.enabled = true
+                navigationController?.popViewControllerAnimated(true)
+            } else { // block save button
+                saveButtonItem.enabled = false
+            }
+//            let updatedEntry = Entry(title: entryTitle.text!, bodyText: entryBody.text!)
             
-            EntryController.singleton.updateEntry(updatedEntry, index: existingIndex)
+            
             
         } else { // add new entry
             print("Add entry")
             
                 EntryController.singleton.addEntry(Entry(title: entryTitle.text!, bodyText: entryBody.text!))
+            navigationController?.popViewControllerAnimated(true)
 
         }
 
         // go back to the list.
-        navigationController?.popViewControllerAnimated(true)
     }
     
     

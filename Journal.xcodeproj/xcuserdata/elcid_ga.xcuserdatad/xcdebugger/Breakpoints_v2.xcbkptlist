@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Journal/EntryDetailViewController.swift"
-            timestampString = "466727067.444744"
+            timestampString = "466729319.722111"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "saveEntry(_:)"
             landmarkType = "5">
          </BreakpointContent>
