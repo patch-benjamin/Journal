@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9058" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1wF-2D-zOJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1wF-2D-zOJ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9048"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -21,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-516" y="293"/>
         </scene>
-        <!--View Controller-->
+        <!--Journal Entries-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Journal" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +34,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dkP-ti-lzX">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dkP-ti-lzX">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,8 +79,14 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dkP-ti-lzX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="8yt-dF-MrJ"/>
+                            <constraint firstItem="dkP-ti-lzX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Cg1-KH-lfE"/>
+                            <constraint firstItem="dkP-ti-lzX" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="hld-Hz-OzI"/>
+                            <constraint firstAttribute="trailing" secondItem="dkP-ti-lzX" secondAttribute="trailing" id="wMY-Ik-fNT"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="27M-7Z-fQa">
+                    <navigationItem key="navigationItem" title="Journal Entries" id="27M-7Z-fQa">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lk9-60-bHc">
                             <connections>
                                 <segue destination="4Do-Cb-Gjh" kind="show" identifier="addNewEntry" id="REm-2b-mvi"/>
@@ -106,23 +113,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PYT-pg-aXN">
-                                <rect key="frame" x="252" y="83" width="97" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="4Do-Cb-Gjh" id="L1d-Fa-b1K"/>
-                                </connections>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fz2-jM-m76">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fz2-jM-m76">
                                 <rect key="frame" x="20" y="124" width="560" height="418"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="418" id="FuM-d8-RSf"/>
+                                </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="4Do-Cb-Gjh" id="LVD-Vt-QnD"/>
+                                </connections>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVn-5K-4Kl">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVn-5K-4Kl">
                                 <rect key="frame" x="267" y="550" width="67" height="42"/>
                                 <animations/>
                                 <state key="normal" title="Clear"/>
@@ -130,14 +134,35 @@
                                     <action selector="clearContent:" destination="4Do-Cb-Gjh" eventType="touchUpInside" id="UcO-ct-ciN"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PYT-pg-aXN">
+                                <rect key="frame" x="252" y="86" width="97" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="yp7-bq-cXO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="4Do-Cb-Gjh" id="L1d-Fa-b1K"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fz2-jM-m76" firstAttribute="leading" secondItem="64L-us-oCY" secondAttribute="leadingMargin" id="6FW-cF-Y1k"/>
+                            <constraint firstItem="fz2-jM-m76" firstAttribute="centerX" secondItem="EVn-5K-4Kl" secondAttribute="centerX" id="Bmx-jx-07W"/>
+                            <constraint firstItem="fz2-jM-m76" firstAttribute="top" secondItem="64L-us-oCY" secondAttribute="top" constant="124" id="Gyb-Z9-Chh"/>
+                            <constraint firstItem="PYT-pg-aXN" firstAttribute="centerX" secondItem="fz2-jM-m76" secondAttribute="centerX" id="H9H-PZ-40m"/>
+                            <constraint firstItem="fz2-jM-m76" firstAttribute="trailing" secondItem="64L-us-oCY" secondAttribute="trailingMargin" id="Izw-Dq-1DJ"/>
+                            <constraint firstItem="EVn-5K-4Kl" firstAttribute="top" secondItem="fz2-jM-m76" secondAttribute="bottom" constant="8" symbolic="YES" id="L9E-Yt-AHg"/>
+                            <constraint firstItem="fz2-jM-m76" firstAttribute="top" secondItem="PYT-pg-aXN" secondAttribute="bottom" constant="8" symbolic="YES" id="grr-gn-igJ"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="v5g-bT-Yd5">
                         <barButtonItem key="leftBarButtonItem" id="i7S-kt-9vK"/>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="NBf-7v-pBn">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="NBf-7v-pBn">
                             <connections>
                                 <action selector="saveEntry:" destination="4Do-Cb-Gjh" id="5tF-ry-T96"/>
                             </connections>
@@ -147,6 +172,7 @@
                     <connections>
                         <outlet property="entryBody" destination="fz2-jM-m76" id="tzr-xJ-O9V"/>
                         <outlet property="entryTitle" destination="PYT-pg-aXN" id="4Ex-I3-yW7"/>
+                        <outlet property="navBarTitle" destination="v5g-bT-Yd5" id="Big-JQ-cZC"/>
                         <outlet property="saveButtonItem" destination="NBf-7v-pBn" id="eWE-Yv-ezl"/>
                     </connections>
                 </viewController>

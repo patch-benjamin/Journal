@@ -23,69 +23,69 @@ class EntryDetailViewController: UIViewController {
     
     @IBOutlet weak var entryBody: UITextView!
     
+    @IBOutlet weak var navBarTitle: UINavigationItem!
     
     
-    // MARK: Actions
-    // TODO: text this button.
-    @IBAction func clearContent(sender: UIButton) {
-        
-        entryBody.text = ""
-        entryTitle.text = ""
-        
-    }
-    
-    @IBAction func saveEntry(sender: UIBarButtonItem) {
-        
-      
-        if let existingEntry = entry, existingIndex = index{ // update the entry
-            // create new entry with data from view
-            // send the new entry to replace the old entry
-            
-//            print("update entry: \(existingEntry.title) at index: \(existingIndex)")
-            if let title = entryTitle.text, bodyText = entryBody.text{
-                let updatedEntry = Entry(title: title, bodyText: bodyText)
-                EntryController.singleton.updateEntry(updatedEntry, index: existingIndex)
-                
-                saveButtonItem.enabled = true
-                navigationController?.popViewControllerAnimated(true)
-            } else { // block save button
-                saveButtonItem.enabled = false
-            }
-//            let updatedEntry = Entry(title: entryTitle.text!, bodyText: entryBody.text!)
-            
-            
-            
-        } else { // add new entry
-            print("Add entry")
-            
-                EntryController.singleton.addEntry(Entry(title: entryTitle.text!, bodyText: entryBody.text!))
-            navigationController?.popViewControllerAnimated(true)
-
-        }
-
-        // go back to the list.
-    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
+    // MARK: Actions
+    @IBAction func clearContent(sender: UIButton) {
+        
+        entryBody.text = ""
+        entryTitle.text = ""
+        saveButtonItem.enabled = false
+    }
+    
+    @IBAction func saveEntry(sender: UIBarButtonItem) {
+        
+        // UPDATE EXISTING ENTRY
+        if let existingEntry = entry, existingIndex = index{
+
+            if let title = entryTitle.text, bodyText = entryBody.text{
+                
+                let updatedEntry = Entry(title: title, bodyText: bodyText)
+                EntryController.singleton.updateEntry(updatedEntry, index: existingIndex)
+                
+            }
+            
+        }
+        // ADD NEW ENTRY
+        else {
+            
+            if let title = entryTitle.text, bodyText = entryBody.text{
+                
+                    EntryController.singleton.addEntry(Entry(title: title, bodyText: bodyText))
+                
+            }
+            
+        }
+
+        // go back to the list.
+        navigationController?.popViewControllerAnimated(true)
+
+    }
+    
+    
+    
+    // MARK: Set Up Data
     
     func updateWithEntry (entry: Entry, index: Int){
         
         self.entry = entry
         self.index = index
-        entryTitle.text = "\(entry.title)"
-        entryBody.text = "\(entry.bodyText)"
-        
+        entryTitle.text = entry.title
+        entryBody.text = entry.bodyText
+        navBarTitle.title = entry.title
     }
     
 }
@@ -104,4 +104,52 @@ extension EntryDetailViewController: UITextFieldDelegate {
     
     
     
+    
 }
+
+// commmiteditingstyle in datasource
+
+extension EntryDetailViewController: UITextViewDelegate{
+    
+    func checkEnableDisableSave(){
+        if let title = entryTitle.text, bodyText = entryBody.text {
+            if title != "" && bodyText != "" {
+                saveButtonItem.enabled = true
+            }
+        }
+    }
+    
+    // MARK: Textview/body
+    func textViewDidEndEditing(textView: UITextView) {
+        checkEnableDisableSave()
+        textView.resignFirstResponder()
+    }
+    func textViewDidBeginEditing(textView: UITextView) {
+        saveButtonItem.enabled = false
+        
+    }
+    
+    
+    
+    override func resignFirstResponder() -> Bool {
+        return true
+    }
+    
+    // MARK: TextField/title
+    func textFieldDidEndEditing(textField: UITextField){
+        checkEnableDisableSave()
+        if let title = entryTitle.text {
+            navBarTitle.title = title
+        }
+    }
+}
+
+
+
+/*
+
+textFieldDidEndEditing
+resignFirstResponder
+
+
+*/
