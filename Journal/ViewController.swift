@@ -83,7 +83,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
+        if editingStyle == UITableViewCellEditingStyle.Delete
+        {
+            var index: Int = indexPath.row
+            EntryController.singleton.removeEntry(index)
+            entriesTable.reloadData()
             
         }
     }

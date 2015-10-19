@@ -39,6 +39,13 @@ class EntryController {
         
     }
     
+    func removeEntry(index: Int) -> () {
+        
+        self.entryArray.removeAtIndex(index)
+        saveToPersistentStorage()
+        
+    }
+    
     
     func updateEntry(entry: Entry, index: Int) -> () {
         
